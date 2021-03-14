@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head ::htmlHead"></head>
+
+<body>
+<h2>Add product</h2>
+<div th:replace="fragments/navigation ::navbar"></div>
+
+<section>
+
+  <form action="#" th:action="@{/product-form-process}"
+        th:object="${product}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{productName}" />
+    <textarea th:field="*{description}" ></textarea>
+    <input type="file" th:field="*{image}" />
+    <input type="submit" />
+
+  </form>
+
+
+</section>
+</body>
+</html>
