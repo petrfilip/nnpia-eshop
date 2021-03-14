@@ -23,12 +23,16 @@ class ProductRepositoryTest {
   @Test
   void saveProductTest() {
 
-    Product product = new Product();
-    product.setProductName("MyProduct");
-    productRepository.save(product);
+    saveProduct();
     List<Product> all = productRepository.findAll();
     Assertions.assertThat(all.size()).isEqualTo(1);
 
+  }
+
+  private void saveProduct() {
+    Product product = new Product();
+    product.setProductName("MyProduct");
+    productRepository.save(product);
   }
 
 }
