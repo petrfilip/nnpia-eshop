@@ -2,13 +2,7 @@ package cz.upce.eshop.entity;
 
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -28,6 +22,9 @@ public class Product {
 
   @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
   private Set<OrderHasProduct> productInOrders;
+
+  @ManyToOne(optional = false)
+  private Supplier supplier;
 
   public String getProductName() {
     return productName;
@@ -86,5 +83,13 @@ public class Product {
   @Override
   public int hashCode() {
     return Objects.hash(id, productName);
+  }
+
+  public void setSupplier(Supplier supplier) {
+    this.supplier = supplier;
+  }
+
+  public Supplier getSupplier() {
+    return supplier;
   }
 }
