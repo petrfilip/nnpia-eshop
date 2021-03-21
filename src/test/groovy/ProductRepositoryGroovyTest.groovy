@@ -1,5 +1,6 @@
-package cz.upce.eshop;
+package cz.upce.eshop
 
+import cz.upce.eshop.datafactory.Creator;
 import cz.upce.eshop.datafactory.ProductTestDataFactory
 import cz.upce.eshop.datafactory.SupplierTestDataFactory;
 import cz.upce.eshop.entity.Product;
@@ -18,26 +19,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import([ProductTestDataFactory.class, SupplierTestDataFactory.class])
+@Import([Creator.class])
 class ProductRepositoryGroovyTest {
+
+    @Autowired
+    private Creator creator;
 
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    ProductTestDataFactory productTestDataFactory;
 
     @Test
     void saveProductTest() {
 
         Product testProduct = new Product(productName: "MyProduct")
-        productTestDataFactory.saveProduct(testProduct);
+        creator.save(testProduct);
+
         List<Product> all = productRepository.findAll();
         Assertions.assertThat(all.size()).isEqualTo(1);
 
         def readFromDb = productRepository.findById(testProduct.getId()).get()
         Assertions.assertThat(readFromDb.getProductName()).isEqualTo("MyProduct");
         Assertions.assertThat(readFromDb.getDescription()).isEqualTo("Test description");
+
+        Assertions.assertThat(readFromDb.getSupplier().name).isEqualTo("Test name")
 
     }
 
