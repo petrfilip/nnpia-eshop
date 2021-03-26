@@ -1,5 +1,6 @@
 package cz.upce.eshop.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +16,7 @@ public class FileServiceImpl implements FileService {
   public String upload(MultipartFile image) {
 
     try {
-      Path path = Paths.get("/home/pfilip/Projects/upce/eshop/images/" + image.getOriginalFilename());
+      Path path = Paths.get("C:\\Users\\zuzka\\IdeaProjects\\nnpia-eshop\\images\\" + image.getOriginalFilename());
       Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
     } catch (IOException e) {
       e.printStackTrace();
