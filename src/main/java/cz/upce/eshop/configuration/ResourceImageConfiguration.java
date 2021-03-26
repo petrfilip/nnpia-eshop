@@ -12,7 +12,7 @@ public class ResourceImageConfiguration implements WebMvcConfigurer {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
       registry.addResourceHandler("/images/**")
-          .addResourceLocations("file:/home/pfilip/Projects/upce/eshop/images/");
+          .addResourceLocations("file:C:\\Users\\zuzka\\IdeaProjects\\nnpia-eshop\\images\\");
 
   }
 }
