@@ -1,6 +1,7 @@
 package cz.upce.eshop;
 
 import cz.upce.eshop.datafactory.ProductTestDataFactory;
+import cz.upce.eshop.datafactory.SupplierTestDataFactory;
 import cz.upce.eshop.entity.Product;
 import cz.upce.eshop.repository.ProductRepository;
 import java.util.List;
@@ -17,7 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(ProductTestDataFactory.class)
+@Import({ProductTestDataFactory.class, SupplierTestDataFactory.class})
+
+
 class ProductRepositoryTest {
 
   @Autowired

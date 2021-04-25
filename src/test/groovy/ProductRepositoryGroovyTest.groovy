@@ -4,7 +4,9 @@ import cz.upce.eshop.datafactory.Creator;
 import cz.upce.eshop.datafactory.ProductTestDataFactory
 import cz.upce.eshop.datafactory.SupplierTestDataFactory;
 import cz.upce.eshop.entity.Product;
-import cz.upce.eshop.repository.ProductRepository;
+import cz.upce.eshop.repository.ProductRepository
+import org.junit.jupiter.api.BeforeEach;
+
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,10 @@ class ProductRepositoryGroovyTest {
     @Autowired
     private ProductRepository productRepository;
 
+    @BeforeEach
+    public void beforeEach() {
+        productRepository.deleteAll();
+    }
 
     @Test
     void saveProductTest() {

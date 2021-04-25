@@ -12,13 +12,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(Creator.class)
 public class ProductUITest {
+
+    @LocalServerPort
+    private int localServerPort;
 
     private WebDriver driver;
 
@@ -64,7 +68,7 @@ public class ProductUITest {
 
 
     private void singleProductAddTest() {
-        driver.get("http://localhost:8080/product-form");
+        driver.get("http://localhost:" + localServerPort + "/product-form");
         driver.findElement(By.id("productName")).sendKeys("nůžky");
         driver.findElement(By.id("image")).sendKeys("c:\\Users\\zuzka\\Pictures\\stažený soubor.png" );
         driver.findElement(By.xpath("//input[@type='submit']")).click();
