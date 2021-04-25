@@ -13,16 +13,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest(classes = EshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = EshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(Creator.class)
 public class ProductUITest {
 
     private WebDriver driver;
+
+    @LocalServerPort
+    private int localServerPort;
 
     @Autowired
     ProductRepository productRepository;
@@ -59,7 +63,7 @@ public class ProductUITest {
                 new Product(productName: "product3"),
         )
 
-        driver.get("http://localhost:8080/");
+        driver.get("http://localhost:" + localServerPort + "/");
 
         Assert.assertEquals(1, driver.findElements(By.xpath("//h3[text()='product1']")).size());
         Assert.assertEquals(1, driver.findElements(By.xpath("//h3[text()='product2']")).size());

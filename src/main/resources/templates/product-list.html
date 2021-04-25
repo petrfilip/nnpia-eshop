@@ -3,8 +3,9 @@
 <head th:replace="fragments/head ::htmlHead"></head>
 
 <body>
-<h2>Product list</h2>
 <div th:replace="fragments/navigation ::navbar"></div>
+<h2>Product list</h2>
+
 <section class="product-list">
 
   <div class="product" th:each="product : ${productList}">
@@ -15,5 +16,6 @@
   </div>
 
 </section>
+
 </body>
 </html>
