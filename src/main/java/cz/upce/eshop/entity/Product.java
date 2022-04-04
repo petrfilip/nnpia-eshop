@@ -23,7 +23,7 @@ public class Product {
   @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
   private Set<OrderHasProduct> productInOrders;
 
-  @ManyToOne(optional = false)
+  @ManyToOne
   private Supplier supplier;
 
   public String getProductName() {
